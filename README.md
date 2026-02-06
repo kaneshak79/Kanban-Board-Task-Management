@@ -29,6 +29,7 @@ The workflow consists of three columns:
 Each task contains detailed information including priority and tags.
 
 🚀 Core Features
+
 1️⃣ Task Creation
 
 Users can create a task directly inside a column.
@@ -113,32 +114,23 @@ Shadow effects
 Rounded components
 
 🛠 Tech Stack
+
 Technology	Purpose
+
 React JS	Frontend Framework
+
 @dnd-kit	Drag & Drop functionality
+
 Context API	Global State Management
+
 Tailwind CSS	Styling
+
 UUID	Unique task IDs
+
 Vite	Fast Development Server
-📂 Folder Structure
-src/
-│
-├── components/
-│   ├── Column.jsx        // Column container
-│   ├── TaskCard.jsx      // Individual draggable task
-│   ├── TaskModal.jsx     // Edit/Delete modal
-│   ├── Navbar.jsx
-│
-├── context/
-│   └── TaskContext.jsx   // Global task state
-│
-├── pages/
-│   └── Home.jsx          // Main board layout
-│
-├── App.jsx
-└── main.jsx
 
 🧠 Application Flow
+
 Step 1 – Task Creation
 
 User fills form →
@@ -160,17 +152,9 @@ Modal opens →
 Edits saved →
 Global state updated.
 
-🧩 Task Object Structure
-{
-  id: "unique-id",
-  title: "Complete project",
-  description: "Finish Kanban board implementation",
-  status: "todo",
-  priority: "High",
-  tags: ["react", "frontend"]
-}
 
 ⚙️ Installation Guide
+
 1️⃣ Clone Repository
 git clone https://github.com/your-username/kanban-board.git
 
