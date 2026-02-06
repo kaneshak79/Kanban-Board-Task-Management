@@ -20,21 +20,23 @@ const Column = ({ title, columnId, tasks, onTaskClick }) => {
   const handleAddTask = () => {
     if (!taskTitle.trim()) return;
 
+    const tagArray = tags
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+
     const newTask = {
       id: uuidv4(),
       title: taskTitle,
       description,
-      status: columnId, 
-      tags: tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter((t) => t),
+      status: columnId,
+      tags: tagArray,  
       priority,
     };
 
-    setTasks((prev) => [...prev, newTask]);
+   
+    setTasks((prev) => [...prev, { ...newTask, tags: tagArray }]);
 
-    
     setTaskTitle("");
     setDescription("");
     setTags("");
@@ -48,7 +50,7 @@ const Column = ({ title, columnId, tasks, onTaskClick }) => {
     >
       <h2 className="text-xl font-bold mb-4">{title}</h2>
 
-      
+      {/* Add Task UI */}
       <input
         type="text"
         placeholder="Task title"
@@ -73,9 +75,7 @@ const Column = ({ title, columnId, tasks, onTaskClick }) => {
       />
 
       <div className="mb-2">
-        <label className="block mb-1 text-sm font-medium">
-          Priority
-        </label>
+        <label className="block mb-1 text-sm font-medium">Priority</label>
         <select
           className="w-full border p-2 rounded"
           value={priority}
@@ -94,7 +94,7 @@ const Column = ({ title, columnId, tasks, onTaskClick }) => {
         Add Task
       </button>
 
-     
+      {/* Tasks */}
       <div className="space-y-3">
         {tasks.map((task) => (
           <TaskCard
@@ -109,4 +109,3 @@ const Column = ({ title, columnId, tasks, onTaskClick }) => {
 };
 
 export default Column;
-

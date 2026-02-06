@@ -3,7 +3,8 @@ import React, { useState, useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { v4 as uuidv4 } from "uuid";
 
-const AddTaskForm = ({ column }) => {
+
+function AddTaskForm({column}){
   const { addTask } = useContext(TaskContext);
 
   const [title, setTitle] = useState("");

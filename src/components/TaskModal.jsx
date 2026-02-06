@@ -1,8 +1,7 @@
 
-
 import { useState } from "react";
 
-export default function TaskModal({ task, onClose, onSave, onDelete }) {
+ function TaskModal({ task, onClose, onSave, onDelete }) {
   const [editedTask, setEditedTask] = useState(task);
 
   const handleChange = (e) => {
@@ -133,4 +132,4 @@ export default function TaskModal({ task, onClose, onSave, onDelete }) {
   );
 }
 
-
+export default TaskModal;
