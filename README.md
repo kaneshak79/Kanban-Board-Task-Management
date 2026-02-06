@@ -1,123 +1,232 @@
-Kanban Board Application
+🗂 Kanban Board – React Task Management App
 
-A modern Kanban-style task management application built using React JS, @dnd-kit for drag-and-drop functionality, and Context API for global state management.
+A fully functional Kanban-style task management application built with React JS, implementing drag-and-drop functionality using @dnd-kit, global state management using Context API, and modern UI styling using Tailwind CSS.
 
-Users can create, edit, delete, and move tasks across columns: To Do, In Progress, and Done.
+This project demonstrates advanced React concepts including state lifting, context management, controlled components, drag-and-drop handling, and component modularization.
 
-🚀 Features
+📌 Project Overview
 
-✅ Create tasks
+The Kanban Board allows users to:
 
-✅ Edit tasks in modal
+Create tasks
 
-✅ Delete tasks
+Organize them into columns
 
-✅ Drag and drop between columns
+Edit task details
 
-✅ Task priority (Low / Medium / High)
+Delete tasks
 
-✅ Tags support
+Drag and drop tasks between workflow stages
 
-✅ Responsive UI with Tailwind CSS
+The workflow consists of three columns:
 
-✅ Clean state management using Context API
+📝 To Do
 
-🛠 Tech Stack
+🚧 In Progress
 
-React JS
+✅ Done
+
+Each task contains detailed information including priority and tags.
+
+🚀 Core Features
+1️⃣ Task Creation
+
+Users can create a task directly inside a column.
+When a task is created:
+
+A unique ID is generated using uuid
+
+Status is automatically assigned based on the column
+
+Tags are parsed into an array
+
+Priority is stored
+
+2️⃣ Drag and Drop (DnD Kit)
+
+The app uses:
 
 @dnd-kit/core
+@dnd-kit/sortable
 
-Context API
 
-Tailwind CSS
+Each column is made droppable using:
 
-UUID (for unique task IDs)
+useDroppable({ id: columnId })
 
-Vite (for fast development build)
 
-📂 Project Structure
+Each task card is draggable.
+
+When a task is dropped into another column:
+
+The status field of that task is updated
+
+The UI re-renders automatically
+
+3️⃣ Task Editing (Modal)
+
+Clicking a task opens a modal where users can:
+
+Edit title
+
+Edit description
+
+Change priority
+
+Modify tags
+
+Change status
+
+Delete task
+
+All edits update the global task state instantly.
+
+4️⃣ Global State Management (Context API)
+
+All tasks are stored in a centralized TaskContext.
+
+const { tasks, setTasks } = useContext(TaskContext);
+
+
+This ensures:
+
+No prop drilling
+
+Clean architecture
+
+Easy state updates
+
+Better scalability
+
+5️⃣ Tailwind CSS Styling
+
+The UI is styled using Tailwind CSS for:
+
+Responsive layout
+
+Modern UI design
+
+Clean spacing
+
+Shadow effects
+
+Rounded components
+
+🛠 Tech Stack
+Technology	Purpose
+React JS	Frontend Framework
+@dnd-kit	Drag & Drop functionality
+Context API	Global State Management
+Tailwind CSS	Styling
+UUID	Unique task IDs
+Vite	Fast Development Server
+📂 Folder Structure
 src/
 │
 ├── components/
+│   ├── Column.jsx        // Column container
+│   ├── TaskCard.jsx      // Individual draggable task
+│   ├── TaskModal.jsx     // Edit/Delete modal
 │   ├── Navbar.jsx
-│   ├── Column.jsx
-│   ├── TaskCard.jsx
-│   ├── TaskModal.jsx
 │
 ├── context/
-│   └── TaskContext.jsx
+│   └── TaskContext.jsx   // Global task state
 │
 ├── pages/
-│   └── Home.jsx
+│   └── Home.jsx          // Main board layout
 │
 ├── App.jsx
 └── main.jsx
 
-🧠 How It Works
+🧠 Application Flow
+Step 1 – Task Creation
 
-All tasks are stored in a single tasks array.
+User fills form →
+Task object is created →
+Stored in global state →
+Column filters based on status.
 
-Each task contains:
+Step 2 – Drag Event
 
-id
+User drags task →
+Drop detected →
+Task status updated →
+Board re-renders.
 
-title
+Step 3 – Edit
 
-description
+User clicks task →
+Modal opens →
+Edits saved →
+Global state updated.
 
-status (todo, inprogress, done)
+🧩 Task Object Structure
+{
+  id: "unique-id",
+  title: "Complete project",
+  description: "Finish Kanban board implementation",
+  status: "todo",
+  priority: "High",
+  tags: ["react", "frontend"]
+}
 
-priority
-
-tags (array)
-
-Columns filter tasks based on their status.
-
-Drag-and-drop updates the task’s status.
-
-Editing in the modal updates the task inside the global state.
-
-⚙️ Installation
-1️⃣ Clone the repository
+⚙️ Installation Guide
+1️⃣ Clone Repository
 git clone https://github.com/your-username/kanban-board.git
 
 2️⃣ Navigate into project
 cd kanban-board
 
-3️⃣ Install dependencies
+3️⃣ Install Dependencies
 npm install
 
-4️⃣ Install required packages (if needed)
+4️⃣ Install Required Packages
 npm install @dnd-kit/core @dnd-kit/sortable uuid
 
-5️⃣ Run the development server
+5️⃣ Start Development Server
 npm run dev
 
 
-App runs at:
+Open in browser:
 
 http://localhost:5173
 
-🎯 Future Improvements
+🔮 Future Enhancements
 
-🔄 Add localStorage persistence
+💾 Add localStorage persistence
 
-📅 Add due dates
+🔍 Search and filter tasks
 
-🔍 Add search & filtering
+📅 Due date feature
 
-🌙 Add dark mode
+🌙 Dark mode
 
-📊 Add analytics dashboard
+🔐 Authentication
 
-✨ Add smooth animations
+📱 Mobile optimization improvements
 
-📸 Screenshots
+📊 Task analytics dashboard
 
-(Add screenshots here)
+🎯 Learning Outcomes
+
+Through this project, the following concepts were implemented:
+
+Advanced React state management
+
+Controlled forms
+
+Component reusability
+
+Drag-and-drop architecture
+
+UI responsiveness with Tailwind
+
+Context API implementation
+
+Event handling in React
+
+Functional programming concepts
 
 👩‍💻 Author
 
 Kanesha K
-Frontend Developer | React Enthusiast
