@@ -1,4 +1,4 @@
-## ** 🗂 Kanban Board – React Task Management App**
+# 🗂 Kanban Board – React Task Management App
 
 A fully functional Kanban-style task management application built with React JS, implementing drag-and-drop functionality using @dnd-kit, global state management using Context API, and modern UI styling using Tailwind CSS.
 
