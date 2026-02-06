@@ -1,16 +1,123 @@
-# React + Vite
+Kanban Board Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Kanban-style task management application built using React JS, @dnd-kit for drag-and-drop functionality, and Context API for global state management.
 
-Currently, two official plugins are available:
+Users can create, edit, delete, and move tasks across columns: To Do, In Progress, and Done.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Features
 
-## React Compiler
+✅ Create tasks
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+✅ Edit tasks in modal
 
-## Expanding the ESLint configuration
+✅ Delete tasks
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Drag and drop between columns
+
+✅ Task priority (Low / Medium / High)
+
+✅ Tags support
+
+✅ Responsive UI with Tailwind CSS
+
+✅ Clean state management using Context API
+
+🛠 Tech Stack
+
+React JS
+
+@dnd-kit/core
+
+Context API
+
+Tailwind CSS
+
+UUID (for unique task IDs)
+
+Vite (for fast development build)
+
+📂 Project Structure
+src/
+│
+├── components/
+│   ├── Navbar.jsx
+│   ├── Column.jsx
+│   ├── TaskCard.jsx
+│   ├── TaskModal.jsx
+│
+├── context/
+│   └── TaskContext.jsx
+│
+├── pages/
+│   └── Home.jsx
+│
+├── App.jsx
+└── main.jsx
+
+🧠 How It Works
+
+All tasks are stored in a single tasks array.
+
+Each task contains:
+
+id
+
+title
+
+description
+
+status (todo, inprogress, done)
+
+priority
+
+tags (array)
+
+Columns filter tasks based on their status.
+
+Drag-and-drop updates the task’s status.
+
+Editing in the modal updates the task inside the global state.
+
+⚙️ Installation
+1️⃣ Clone the repository
+git clone https://github.com/your-username/kanban-board.git
+
+2️⃣ Navigate into project
+cd kanban-board
+
+3️⃣ Install dependencies
+npm install
+
+4️⃣ Install required packages (if needed)
+npm install @dnd-kit/core @dnd-kit/sortable uuid
+
+5️⃣ Run the development server
+npm run dev
+
+
+App runs at:
+
+http://localhost:5173
+
+🎯 Future Improvements
+
+🔄 Add localStorage persistence
+
+📅 Add due dates
+
+🔍 Add search & filtering
+
+🌙 Add dark mode
+
+📊 Add analytics dashboard
+
+✨ Add smooth animations
+
+📸 Screenshots
+
+(Add screenshots here)
+
+👩‍💻 Author
+
+Kanesha K
+Frontend Developer | React Enthusiast
