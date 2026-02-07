@@ -1,106 +1,42 @@
 
-import React, { useContext, useState } from "react";
-import { TaskContext } from "../context/TaskContext";
+
+
+import React from "react";
 import { useDroppable } from "@dnd-kit/core";
-import { v4 as uuidv4 } from "uuid";
-import TaskCard from "./TaskCard";
+import SortableTaskCard from "./SortableTaskCard";
 
-const Column = ({ title, columnId, tasks, onTaskClick }) => {
-  const { setTasks } = useContext(TaskContext);
-
-  const { setNodeRef } = useDroppable({
+const Column = ({ columnId, title, tasks, onTaskClick }) => {
+  const { setNodeRef, isOver } = useDroppable({
     id: columnId,
   });
-
-  const [taskTitle, setTaskTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
-  const [priority, setPriority] = useState("Medium");
-
-  const handleAddTask = () => {
-    if (!taskTitle.trim()) return;
-
-    const tagArray = tags
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean);
-
-    const newTask = {
-      id: uuidv4(),
-      title: taskTitle,
-      description,
-      status: columnId,
-      tags: tagArray,  
-      priority,
-    };
-
-   
-    setTasks((prev) => [...prev, { ...newTask, tags: tagArray }]);
-
-    setTaskTitle("");
-    setDescription("");
-    setTags("");
-    setPriority("Medium");
-  };
 
   return (
     <div
       ref={setNodeRef}
-      className="bg-white p-4 rounded-xl shadow-md min-h-[500px]"
+      className={`bg-white rounded-xl p-4 shadow-sm border min-h-[500px] flex flex-col
+        ${isOver ? "ring-2 ring-blue-400" : ""}`}
     >
-      <h2 className="text-xl font-bold mb-4">{title}</h2>
-
-      {/* Add Task UI */}
-      <input
-        type="text"
-        placeholder="Task title"
-        className="w-full border p-2 rounded mb-2"
-        value={taskTitle}
-        onChange={(e) => setTaskTitle(e.target.value)}
-      />
-
-      <textarea
-        placeholder="Task description"
-        className="w-full border p-2 rounded mb-2"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <input
-        type="text"
-        placeholder="Tags (comma separated)"
-        className="w-full border p-2 rounded mb-2"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-      />
-
-      <div className="mb-2">
-        <label className="block mb-1 text-sm font-medium">Priority</label>
-        <select
-          className="w-full border p-2 rounded"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-        >
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-      </div>
-
-      <button
-        onClick={handleAddTask}
-        className="bg-pink-500 text-white px-4 py-2 rounded mb-4 hover:bg-pink-600"
-      >
-        Add Task
-      </button>
+      {/* Column Header */}
+      <h2 className="text-lg font-bold mb-4 flex justify-between items-center">
+        <span>{title}</span>
+        <span className="text-sm bg-gray-100 px-2 py-1 rounded">
+          {tasks.length}
+        </span>
+      </h2>
 
       {/* Tasks */}
-      <div className="space-y-3">
+      <div className="flex-1 space-y-3">
+        {tasks.length === 0 && (
+          <p className="text-gray-400 text-sm text-center mt-10">
+            No tasks
+          </p>
+        )}
+
         {tasks.map((task) => (
-          <TaskCard
+          <SortableTaskCard
             key={task.id}
             task={task}
-            onTaskClick={onTaskClick}
+            onClick={() => onTaskClick(task)}
           />
         ))}
       </div>

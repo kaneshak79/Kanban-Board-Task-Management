@@ -1,22 +1,40 @@
 
-function Navbar(){
+
+
+import React, { useState } from "react";
+import AddTaskForm from "./AddTaskForm";
+
+const Navbar = () => {
+  const [showAddModal, setShowAddModal] = useState(false);
+
   return (
-    <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-6 py-4 shadow-lg sticky top-0 z-50">
-      <div className="flex justify-between items-center">
-        
-        <div className="text-3xl font-bold tracking-wide">
-          Kanban Board
+    <>
+      {/* Navbar */}
+      <nav className="flex justify-between items-center px-6 py-4 bg-white shadow-sm border-b">
+        {/* Logo / Title */}
+        <div className="flex items-center gap-2">
+          <span className="text-xl font-bold text-slate-800">
+            Kanban Board
+          </span>
         </div>
 
-        
-        <button className="bg-white text-purple-600 font-semibold px-4 py-2 rounded-lg shadow-md hover:shadow-xl hover:bg-purple-50 transition duration-300">
-          Home
-        </button>
-      </div>
-    </nav>
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="px-4 py-2 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition"
+          >
+            + Add Task
+          </button>
+        </div>
+      </nav>
+
+      {/* Add Task Modal */}
+      {showAddModal && (
+        <AddTaskForm onClose={() => setShowAddModal(false)} />
+      )}
+    </>
   );
 };
 
 export default Navbar;
-
-

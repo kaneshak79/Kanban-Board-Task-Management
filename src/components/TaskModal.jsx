@@ -1,7 +1,9 @@
 
+
+
 import { useState } from "react";
 
- function TaskModal({ task, onClose, onSave, onDelete }) {
+function TaskModal({ task, onClose, onSave, onDelete }) {
   const [editedTask, setEditedTask] = useState(task);
 
   const handleChange = (e) => {
@@ -16,10 +18,18 @@ import { useState } from "react";
   if (!task) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.35),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.35),transparent_40%),linear-gradient(to_bottom,rgba(15,23,42,0.6),rgba(2,6,23,0.85))] backdrop-blur-2xl">
-    
-      <div className="bg-white w-[600px] rounded-2xl shadow-2xl overflow-hidden">
-      
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+      {/* 🌤️ SAME BACKGROUND AS AddTaskForm */}
+      <div
+        onClick={onClose}
+        className="absolute inset-0 bg-black/75 backdrop-blur-md"
+      />
+
+      {/* MODAL CARD */}
+      <div className="relative bg-white w-[600px] max-w-[95%] rounded-2xl shadow-2xl overflow-hidden z-10">
+
+        {/* Header */}
         <div className="flex justify-between items-center px-6 py-4 border-b">
           <h2 className="text-xl font-semibold text-purple-700">
             Task Details
@@ -32,10 +42,10 @@ import { useState } from "react";
           </button>
         </div>
 
-     
+        {/* Body */}
         <div className="p-6 space-y-4">
           
-        
+          {/* Title */}
           <div>
             <label className="block text-sm mb-1">Title</label>
             <input
@@ -47,7 +57,7 @@ import { useState } from "react";
             />
           </div>
 
-          
+          {/* Description */}
           <div>
             <label className="block text-sm mb-1">Description</label>
             <textarea
@@ -58,7 +68,7 @@ import { useState } from "react";
             />
           </div>
 
-       
+          {/* Status + Priority */}
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm mb-1">Status</label>
@@ -89,7 +99,7 @@ import { useState } from "react";
             </div>
           </div>
 
-         
+          {/* Tags */}
           <div>
             <label className="block text-sm mb-1">Tags</label>
             <input
@@ -103,6 +113,7 @@ import { useState } from "react";
           </div>
         </div>
 
+        {/* Footer */}
         <div className="flex justify-between items-center px-6 py-4 border-t">
           <button
             onClick={() => onDelete(task.id)}
@@ -127,6 +138,7 @@ import { useState } from "react";
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -1,64 +1,73 @@
 
-import { useDraggable } from "@dnd-kit/core";
 
-const TaskCard = ({ task, onTaskClick }) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: task.id,
-  });
 
-  const style = {
-    transform: transform
-      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-      : undefined,
-  };
+import React from "react";
 
-  //FIX: Normalize tags
-  let tagsArray = [];
+const priorityColors = {
+  High: "bg-red-100 text-red-700",
+  Medium: "bg-yellow-100 text-yellow-700",
+  Low: "bg-green-100 text-green-700",
+};
 
-  if (Array.isArray(task.tags)) {
-    tagsArray = task.tags;
-  } else if (typeof task.tags === "string" && task.tags.trim() !== "") {
-    tagsArray = task.tags
-      .split(",")
-      .map((t) => t.trim())
-      .filter((t) => t !== "");
-  }
+const statusColors = {
+  "To Do": "bg-gray-200 text-gray-700",
+  "In Progress": "bg-blue-100 text-blue-700",
+  "Done": "bg-green-100 text-green-700",
+};
 
+const TaskCard = ({ task, onClick }) => {
   return (
     <div
-      ref={setNodeRef}
-      style={style}
-      className="bg-gray-50 p-4 rounded-lg shadow border cursor-pointer"
-      onClick={() => onTaskClick(task)}
+      onClick={onClick}
+      className="bg-white border rounded-lg p-3 shadow-sm cursor-pointer hover:shadow-md transition-all"
     >
-      <div
-        {...attributes}
-        {...listeners}
-        className="bg-white p-4 rounded-lg shadow cursor-grab"
-      >
-        <h3 className="font-semibold">{task.title}</h3>
-        <p className="text-sm text-gray-600">{task.description}</p>
+      {/* Title */}
+      <h3 className="font-semibold text-sm mb-1 truncate">
+        {task.title}
+      </h3>
 
-        {/*  TAGS */}
-        <div className="flex flex-wrap gap-1 mt-2">
-          {tagsArray.length > 0 ? (
-            tagsArray.map((tag, idx) => (
-              <span
-                key={idx}
-                className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded"
-              >
-                {tag}
-              </span>
-            ))
-          ) : (
-            <span className="text-xs text-gray-400">No tags</span>
-          )}
+      {/* Description */}
+      {task.description && (
+        <p className="text-xs text-gray-500 mb-2 line-clamp-2">
+          {task.description}
+        </p>
+      )}
+
+      {/* Tags */}
+      {task.tags && task.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1 mb-2">
+          {task.tags.map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full"
+            >
+              #{tag}
+            </span>
+          ))}
         </div>
+      )}
 
-        {/* PRIORITY */}
-        <div className="mt-2 text-xs bg-purple-100 text-purple-600 px-2 py-1 inline-block rounded">
+      {/* Footer */}
+      <div className="flex justify-between items-center mt-2">
+
+        {/* Priority */}
+        <span
+          className={`text-[10px] px-2 py-1 rounded-full font-semibold ${
+            priorityColors[task.priority] || "bg-gray-100 text-gray-600"
+          }`}
+        >
           {task.priority}
-        </div>
+        </span>
+
+        {/* Status */}
+        <span
+          className={`text-[10px] px-2 py-1 rounded-full font-medium ${
+            statusColors[task.status] || "bg-gray-100 text-gray-600"
+          }`}
+        >
+          {task.status}
+        </span>
+
       </div>
     </div>
   );

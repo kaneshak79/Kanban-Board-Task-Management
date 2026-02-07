@@ -1,4 +1,5 @@
 
+
 import React, { useContext, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 import Column from "../components/Column";
@@ -14,9 +15,9 @@ import {
 } from "@dnd-kit/core";
 
 const columns = [
-  { id: "todo", title: "To Do" },
-  { id: "inprogress", title: "In Progress" },
-  { id: "done", title: "Done" },
+  { id: "To Do", title: "To Do" },
+  { id: "In Progress", title: "In Progress" },
+  { id: "Done", title: "Done" },
 ];
 
 const Home = () => {
@@ -27,21 +28,23 @@ const Home = () => {
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
   );
 
-  
+  // ✅ Drag drop updates status correctly
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (!over) return;
 
-    if (columns.some((col) => col.id === over.id)) {
-      setTasks((prev) =>
-        prev.map((task) =>
-          task.id === active.id ? { ...task, status: over.id } : task
-        )
-      );
-    }
+    const targetColumn = columns.find(col => col.id === over.id);
+    if (!targetColumn) return;
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === active.id
+          ? { ...task, status: targetColumn.id }
+          : task
+      )
+    );
   };
 
-  
   const handleUpdateTask = (updatedTask) => {
     setTasks((prev) =>
       prev.map((task) =>
@@ -60,8 +63,8 @@ const Home = () => {
 
   return (
     <>
-     
-  {!selectedTask && <Navbar />}
+      {!selectedTask && <Navbar />}
+
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -80,7 +83,6 @@ const Home = () => {
         </div>
       </DndContext>
 
-      
       {selectedTask && (
         <TaskModal
           task={selectedTask}
